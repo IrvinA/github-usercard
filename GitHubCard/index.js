@@ -79,15 +79,15 @@ function userCardMaker(objData) {
     and append the returned markup to the DOM as a child of .cards
 */
 
-axios.get('https://api.github.com/users/IrvinA')
-  .then(resp => {
-    const data = resp.data;
-    const profile = userCardMaker(data);
-    document.querySelector('.cards').appendChild(profile);
-  })
-  .catch(err => {
-    console.log(err);
-  })
+// axios.get('https://api.github.com/users/IrvinA')
+//   .then(resp => {
+//     const data = resp.data;
+//     const profile = userCardMaker(data);
+//     document.querySelector('.cards').appendChild(profile);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   })
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -101,6 +101,7 @@ axios.get('https://api.github.com/users/IrvinA')
 */
 
 const followersArray = [
+  "IrvinA",
   "tetondan",
   "dustinmyers",
   "justsml",
@@ -108,7 +109,17 @@ const followersArray = [
   "bigknell"
 ];
 
-
+followersArray.forEach(profile => {
+  axios.get(`https://api.github.com/users/${profile}`)
+    .then(resp => {
+      const data = resp.data;
+      const profile = userCardMaker(data);
+      document.querySelector('.cards').appendChild(profile);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+})
 
 
 
